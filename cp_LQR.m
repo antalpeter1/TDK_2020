@@ -30,7 +30,7 @@ q = [0.2;0;0;0];
 qLQR(:,1) = [q; 0];
 for i = 1 : Duration/Ts
     u = -K*q;
-    [~,q] = ode45(@(t,q) cp_dyn_v3(q,u,par,fr),[0 Ts/2 Ts],q);
+    [~,q] = ode45(@(t,q) cp_dynmodel(q,u,par,fr),[0 Ts/2 Ts],q);
     q = q(3,:)';
     qLQR(:,i+1) = [q; u];
 end
