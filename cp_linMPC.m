@@ -10,7 +10,7 @@ Q = [100 0 1 0];          % MPC weights
 R = 0.0001;
 
 q1 = [phi; phid; x; xd];
-q1 = cp_dyn_v3(q1,u,par,fr);
+q1 = cp_dynmodel(q1,u,par,fr);
 
 Asym = jacobian(q1,[phi;phid;x;xd]);
 A = double(subs(Asym,[phi;phid;x;xd;u],[0;0;0;0;0]));
@@ -38,7 +38,7 @@ for i = 1: Duration / Ts
     input = fmincon(@(u) cost_func_lin(u,horizon,q,Q,R,A2,B),input,[],...
         [],[],[],(K*q-40)*ones(horizon,1),(K*q+40)*ones(horizon,1),[],options);
     u = -K*q + input(1);
-    [~,q] = ode45(@(t,q) cp_dyn_v3(q,u,par,fr),[0 Ts/2 Ts],q);
+    [~,q] = ode45(@(t,q) cp_dynmodel(q,u,par,fr),[0 Ts/2 Ts],q);
     q = q(3,:)';
     qlinMPC(:,i+1) = [q; u];
 end
