@@ -1,7 +1,7 @@
 %% GPMPC for cart-pole dynamic system
 
-addpath 'C:\Users\antal\sztaki\MATLAB\TDK_2020\gp'
-addpath 'C:\Users\antal\sztaki\MATLAB\TDK_2020\util'
+addpath '...\TDK_2020\gp'       % write path of the containing folder
+addpath '...\TDK_2020\util'
 load('cp_params.mat');
 load('cp_trainingpoints.mat');
 fr(1) = 0.2;
