@@ -9,7 +9,7 @@ Q = [100 0 1 0];          % LQ weights
 R = 0.0001;
 
 q1 = [phi; phid; x; xd];
-q1 = cp_dyn_v3(q1,u,par,fr);
+q1 = cp_dynmodel(q1,u,par,fr);
 
 Asym = jacobian(q1,[phi;phid;x;xd]);
 A = double(subs(Asym,[phi;phid;x;xd;u],[0;0;0;0;0]));
